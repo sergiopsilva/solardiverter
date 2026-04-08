@@ -107,7 +107,7 @@ The **PRO** version targets advanced multi-load installations. It controls up to
 | OLED RST | 16 |
 | Botão físico | 0 |
 | LED Status | 32 |
-
+|
 | Modbus TX | 17 |
 | Modbus RX | 16 |
 
@@ -125,18 +125,18 @@ SolarDiverter/
 │   │   ├── temperature_sensor.cpp
 │   │   ├── led_driver.cpp       # LED Status
 │   │   ├── button_driver.cpp    # Botão com debounce
-│   │   └── relay_driver.cpp     # Relés digitais
-│   ├── comms/
-│   │   ├── wifi_manager.cpp     # WiFi
-│   │   ├── mqtt_manager.cpp     # MQTT
-│   │   ├── http_server.cpp      # Web server
-│   │   ├── shelly_em.cpp        # Shelly EM
-│   │   ├── shelly_3em.cpp       # Shelly 3EM
-│   │   └── inverter.cpp         # Modbus RTU
-│   ├── ui/
-│   │   └── oled_display.cpp     # Display OLED
-│   └── tasks/
-│       └── load_control.cpp     # Controlo de carga
+│   │   │   └── relay_driver.cpp     # Relés digitais
+│   │   ├── comms/
+│   │   │   ├── wifi_manager.cpp     # WiFi
+│   │   │   ├── mqtt_manager.cpp     # MQTT
+│   │   │   ├── http_server.cpp      # Web server
+│   │   │   ├── shelly_em.cpp        # Shelly EM
+│   │   │   ├── shelly_3em.cpp       # Shelly 3EM
+│   │   │   └── inverter.cpp         # Modbus RTU
+│   │   ├── ui/
+│   │   │   └── oled_display.cpp     # Display OLED
+│   │   └── tasks/
+│   │       └── load_control.cpp     # Controlo de carga
 ├── include/
 │   ├── pinout.h                 # Definições de pinos
 │   ├── config.h                 # Estruturas de config
@@ -241,10 +241,12 @@ Senão:
     Manter PWM anterior (histerese)
 ```
 
-### Proteção Térmica
+### Proteção Térmica (TRIAC)
 
-Se temperatura ambiente > 60°C:
-- Reduzir PWM em 50%
+Se a temperatura do TRIAC (sensor DS18B20 dedicado) atingir o limite configurado (default 65°C):
+- PWM cortado a 0% (corte total imediato)
+- Display OLED mostra "TRIAC HOT!"
+- Recupera automaticamente quando a temperatura desce 5°C abaixo do limite (histerese)
 
 ## MQTT
 
