@@ -1,138 +1,126 @@
-# ☀️ SolarDiverter
+☀️ SolarDiverter
+Intelligent surplus solar energy diverter for ESP32  
+Controlador inteligente de desvio de excedente solar para ESP32
 
-**Intelligent surplus solar energy diverter for ESP32**
-
-**Controlador inteligente de desvio de excedente solar para ESP32**
-
-> 🔓 **Firmware livre para uso pessoal.** Não pode ser vendido, redistribuído comercialmente ou incluído em produtos comerciais sem autorização escrita do autor.
->
-> 🔓 **Free firmware for personal use.** It may not be sold, commercially redistributed or bundled into commercial products without the author's written permission.
+> 🔓 Firmware livre para uso pessoal. A ativação é obrigatória. A versão LITE é gratuita, mas só é ativada após contacto através do site oficial.  
+> 🔓 Free firmware for personal use. Activation is required. The LITE version is free, but only activated after contacting through the official website.
 
 ---
 
-## 🇵🇹 O que é?
+🇵🇹 O que é?
 
-O **SolarDiverter** transforma o excedente da sua instalação solar em energia útil. Em vez de injetar na rede a preço reduzido (ou zero), o controlador desvia automaticamente cada watt em excesso para cargas resistivas — termoacumuladores, resistências de aquecimento, toalheiros elétricos.
+O SolarDiverter transforma o excedente da sua instalação solar em energia útil, desviando automaticamente cada watt que seria exportado para a rede para cargas resistivas — termoacumuladores, resistências de aquecimento, toalheiros elétricos.
 
-Baseado num **ESP32-WROOM-32U**, configura-se inteiramente por interface Web, sem programação. Monitoriza medidores Shelly EM / 3EM ou inversores Modbus RTU, ajusta o PWM de forma proporcional ao excedente e integra-se com domótica via MQTT.
+Baseado num ESP32-WROOM-32U, é configurado inteiramente via Web UI, sem necessidade de programação. Monitoriza medidores Shelly EM / 3EM ou inversores Modbus RTU, ajusta o PWM proporcionalmente ao excedente e integra-se com domótica via MQTT.
 
-## 🇬🇧 What is it?
+🇬🇧 What is it?
 
-**SolarDiverter** turns your surplus solar production into useful energy. Instead of exporting to the grid at low (or zero) rates, it automatically diverts every excess watt to resistive loads — water heaters, heating elements, towel rails.
+SolarDiverter turns your surplus solar production into useful energy by automatically diverting every excess watt to resistive loads — water heaters, heating elements, towel rails.
 
-Built on an **ESP32-WROOM-32U**, it's fully configured via a Web interface — no coding required. It monitors Shelly EM / 3EM meters or Modbus RTU inverters, adjusts PWM proportionally to surplus, and integrates with home automation via MQTT.
-
----
-
-## Versões / Versions — LITE vs PRO
-
-Disponível em duas versões com funcionalidades distintas:
-Available in two versions with distinct feature sets:
-
-| | LITE | PRO |
-|---|---|---|
-| **Canais PWM** | 1 | 4 (independentes) |
-| **PWM Auto máx.** | 80% | 100% |
-| **Agendamentos** | 1 (simples) | 4 (com janela de temperatura) |
-| **Sensores DS18B20** | 2 | 4 |
-| **Peak Shaving** | ✅ | ✅ |
-| **Battery Priority** | ✅ | ✅ |
-| **MQTT** | ✅ | ✅ |
-| **OTA (Web UI)** | ✅ | ❌ |
-| **Proteção de fase** | ❌ | ✅ (Shelly 3EM) |
-| **Modbus Scanner** | ❌ | ✅ |
-| **Modbus Universal JSON** | ❌ | ✅ |
-| **Partição** | 1.5 MB (com OTA) | 3 MB (huge_app) |
-| **Ativação** | Livre | Chave (Chip ID) |
-
-> **LITE** — 1 carga, 1 agendamento, OTA disponível. Prática e funcional para uso doméstico simples.
->
-> **PRO** — 4 cargas independentes, agendamentos com controlo de temperatura, Modbus avançado, proteção por fase. Para instalações profissionais.
+Built on an ESP32-WROOM-32U, it is fully configured through a Web UI with no coding required. It monitors Shelly EM / 3EM meters or Modbus RTU inverters, adjusts PWM proportionally to surplus, and integrates with home automation via MQTT.
 
 ---
 
-## Quick Start
+🔐 Ativação e Versões / Activation and Versions
 
-### Flash via USB (Windows)
+O SolarDiverter funciona em três estados:
 
-```
-espflash_lite\flash.bat COM4      ← versão LITE
-espflash_pro\flash.bat COM4       ← versão PRO
-```
+1) Antes da ativação — modo limitado  
+2) LITE ativada — gratuita  
+3) PRO ativada — paga, com funcionalidades avançadas
 
-### Primeira configuração
+Todas as ativações (Lite e Pro) são feitas por chave digital e requerem pedido via email.
 
-1. Ligue-se ao WiFi **SolarDiverter-Setup**
-2. Aceda a `http://192.168.4.1`
-3. Configure WiFi, medidor de energia e MQTT
-4. Guarde e reinicie
+A versão LITE é gratuita, mas só é ativada após contacto através do site oficial:  
+👉 https://sergiopsilva.github.io/solardiverter-site/
 
-### Compilar (PlatformIO)
-
-```bash
-pio run                           # LITE
-cd pro && pio run                 # PRO
-```
+A versão PRO é paga, e a chave é gerada com base no Chip ID do dispositivo.
 
 ---
 
-## Funcionalidades / Features
+🇵🇹 Antes da ativação (modo limitado)
 
-- ⚡ Controlo PWM proporcional ao excedente solar (rampa suave)
-- 🌐 Interface Web completa — sem necessidade de programação
-- 📡 Shelly EM, Shelly 3EM (3 fases) e inversores Modbus RTU
-- 🌡️ Sensores DS18B20 — monitorização e proteção térmica
-- 📟 Display OLED — estado em tempo real
-- 🔌 MQTT — Home Assistant, Node-RED, etc.
-- 🛡️ Proteção térmica TRIAC — corte automático a 65°C (configurável)
-- 📶 Modo AP para setup inicial sem rede WiFi
-- 🔄 Watchdog de hardware para segurança operacional
+Quando o firmware é instalado pela primeira vez, funciona em modo restrito:
 
----
+- PWM limitado (40%)  
+- Apenas 1 canal ativo  
+- Agendamentos desativados  
+- Modbus desativado  
+- MQTT parcial  
+- Apenas 1 sensor DS18B20  
+- Algumas proteções e funções avançadas indisponíveis  
 
-## Hardware
+Este modo serve apenas para teste inicial e validação do hardware.
 
-**ESP32-WROOM-32U** — pinout fixo:
+🇬🇧 Before activation (restricted mode)
 
-| Função | GPIO |
-|---|---|
-| PWM (carga) | 25 |
-| DS18B20 (OneWire) | 2 |
-| OLED SDA / SCL / RST | 4 / 15 / 16 |
-| Botão | 0 |
-| LED Status | 32 |
-| Modbus TX / RX | 17 / 16 |
+When first installed, the firmware runs in a restricted mode:
 
----
+- PWM limited (40%)  
+- Only 1 active channel  
+- Scheduling disabled  
+- Modbus disabled  
+- Partial MQTT  
+- Only 1 DS18B20 sensor  
+- Some protections and advanced features unavailable  
 
-## Estrutura / Structure
-
-```
-SolarDiverter/
-├── src/                    # Código-fonte LITE
-├── include/                # Headers LITE
-├── data/                   # Web UI (HTML/CSS/JS)
-├── pro/                    # Código-fonte + headers PRO
-├── espflash_lite/          # Binários + flash script LITE
-├── espflash_pro/           # Binários + flash script PRO
-└── platformio.ini          # Configuração PlatformIO
-```
+This mode is intended for initial testing and hardware validation.
 
 ---
 
-## Licença / License
+🌟 LITE (ativada) — gratuita
 
-**Uso pessoal, não comercial.**
-Qualquer forma de venda, distribuição comercial ou inclusão em produtos comerciais é expressamente proibida sem autorização prévia por escrito do autor.
+🌟 LITE (activated) — free
 
-**Personal, non-commercial use only.**
-Any form of sale, commercial distribution, or inclusion in commercial products is expressly prohibited without prior written authorization from the author.
+A versão LITE é totalmente gratuita, mas requer pedido de ativação via site.  
+Após ativação:
 
-© 2026 **AlternativaIOT** — Sérgio da Silva
+- PWM aumenta para 80%  
+- 1 canal funcional  
+- 1 agendamento simples disponível  
+- 2 sensores DS18B20  
+- MQTT completo  
+- Modbus básico  
+- OTA disponível (Web UI)  
+- Adequado para uso doméstico simples  
+
+A LITE remove as limitações essenciais, mantendo o projeto acessível a todos.
 
 ---
 
-## Contacto / Contact
+🚀 PRO (ativada) — paga
 
-Para dúvidas, sugestões ou pedidos de licenciamento, abra uma issue no repositório.
-For questions, suggestions, or licensing inquiries, open an issue on the repository.
+🚀 PRO (activated) — paid
+
+A versão PRO desbloqueia todas as funcionalidades avançadas:
+
+- 4 canais PWM independentes  
+- PWM até 100%  
+- 4 agendamentos avançados com janelas de temperatura  
+- 4 sensores DS18B20  
+- Modbus completo (Scanner + Universal JSON)  
+- Proteção por fase (Shelly 3EM)  
+- Partição huge_app (3 MB)  
+- Ideal para instalações profissionais ou setups complexos  
+
+A chave PRO é digital, não transferível e associada ao Chip ID.
+
+---
+
+🧩 Formas de obter a versão PRO
+
+A versão PRO pode ser adquirida de três formas:
+
+1) Hardware pronto a ligar
+- O dispositivo é enviado já ativado como PRO  
+- Não é necessário inserir chave  
+
+2) Kit DIY com ESP incluído
+- O ESP segue com Chip ID conhecido  
+- A chave PRO é gerada e ativada antes do envio  
+- O firmware arranca já em modo PRO  
+
+3) Ativação PRO em hardware próprio
+- O utilizador fornece o Chip ID  
+- Compra apenas a chave PRO  
+- Recebe a chave digital por email  
