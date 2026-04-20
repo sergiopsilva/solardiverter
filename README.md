@@ -25,9 +25,10 @@ Built on an ESP32-WROOM-32U, it is fully configured through a Web UI with no cod
 
 O SolarDiverter funciona em três estados:
 
-1) Antes da ativação — modo limitado  
-2) LITE ativada — gratuita  
-3) PRO ativada — paga, com funcionalidades avançadas
+1) Antes da ativação — modo limitado
+    
+3) LITE ativada — gratuita  
+4) PRO ativada — paga, com funcionalidades avançadas
 
 Todas as ativações (Lite e Pro) são feitas por chave digital e requerem pedido via email.
 
