@@ -1,3 +1,5 @@
+<img width="1169" height="826" alt="Schematic_dimmerSOLARDIV_2026-04-21" src="https://github.com/user-attachments/assets/ebd2afeb-a4bb-41d2-b849-e419f1487d43" />
+<img width="847" height="552" alt="diagram" src="https://github.com/user-attachments/assets/7b97dc8e-ab0e-4539-acb4-a07a366bf06e" />
 ☀️ SolarDiverter
 Intelligent surplus solar energy diverter for ESP32  
 Controlador inteligente de desvio de excedente solar para ESP32
