@@ -167,3 +167,8 @@ Recebe a chave digital por email
 
 <img width="567" height="364" alt="SolarDiv esquema de ligação e wifi" src="https://github.com/user-attachments/assets/1b422b7c-2d59-4773-95f3-c2ce3939977c" />
 
+<img width="530" height="699" alt="image1" src="https://github.com/user-attachments/assets/a6e8f910-ab7c-4ef7-a0e8-10dd57d33d1b" />
+<img width="733" height="805" alt="PCB" src="https://github.com/user-attachments/assets/5e8c0a47-f807-46ee-b246-8a1608dfcd07" />
+<img width="525" height="574" alt="image2" src="https://github.com/user-attachments/assets/4f840754-f6b1-4726-8347-01ef16610e3f" />
+
+
